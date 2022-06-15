@@ -10,6 +10,9 @@ import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Picker from './src/components/Picker';
 import { getDaysOfMonth, getMonthOfYear, getYears } from './src/utils/date';
+import { colors } from './src/global/theme';
+
+const primaryColor = '#7f34c9';
 
 export default function App() {
   const [day, setDay] = useState(null);
@@ -38,7 +41,7 @@ export default function App() {
       <LinearGradient
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-        colors={['#6f38a6', '#490091']}
+        colors={[colors.primaryLight, colors.primary]}
         style={styles.header}>
         <Image
           source={{
@@ -47,21 +50,28 @@ export default function App() {
           style={styles.logo}
         />
       </LinearGradient>
+
       <View style={styles.body}>
+        <View style={styles.tittleContainer}>
+          <Text style={styles.title}>Teste App</Text>
+        </View>
+        <View style={styles.subTittleContainer}>
+          <Text style={styles.SubTittle}>Data de Hoje:</Text>
+        </View>
         <Picker
           listItems={getDaysOfMonth()}
           placeholder="Dia"
-          selectedItem={value => setDay(value)}
+          selectedItem={setDay}
         />
         <Picker
           listItems={getMonthOfYear()}
           placeholder="Mes"
-          selectedItem={value => setMonth(value)}
+          selectedItem={setMonth}
         />
         <Picker
           listItems={getYears()}
           placeholder="Ano"
-          selectedItem={value => setYear(value)}
+          selectedItem={setYear}
         />
 
         <View style={styles.buttonContainer}>
@@ -78,14 +88,54 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     borderWidth: 1,
-    backgroundColor: '#7f34c9',
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  tittleContainer: {
+    backgroundColor: colors.background,
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    height: 60,
+    width: 175,
+    transform: [{ translateY: -30 }],
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+
+    elevation: 6,
+  },
+  title: {
+    fontSize: 30,
+    color: colors.primary,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  subTittleContainer: {
+    alignItems: 'flex-start',
+    
+    width: '100%',
+  },
+  SubTittle: {
+    fontSize: 20,
+    color: 'black',
+    paddingBottom: 10,
+    fontWeight: 'bold',
+  },
+
   body: {
     flex: 2,
+    paddingHorizontal: 50,
+    alignItems: 'center',
+    backgroundColor: colors.background,
     //borderWidth: 1,
   },
 
@@ -93,7 +143,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   confirmButton: {
-    backgroundColor: '#7f34c9',
+    backgroundColor: colors.primary,
+
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -106,28 +157,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  buttonContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-  },
-  errorMessage: {
-    color: '#f00',
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  errorMessageContainer: {
-    borderWidth: 1,
-  },
+
   logo: {
     width: 130,
     height: 130,
     backgroundColor: '#fff',
     borderRadius: 65,
   },
-  dropdown: {
-    top: 1,
-    zIndex: -1,
-    backgroundColor: '#fff',
+
+  buttonContainer: {
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+
+    width: '100%',
+    marginTop: 10,
   },
 });
