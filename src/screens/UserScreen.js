@@ -11,19 +11,26 @@ import { colors } from '../global/theme';
 import { useState } from 'react';
 import DefaultContainer from '../components/DefaultContainer';
 import Picker from '../components/Picker';
-import date from '../utils/date';
 import { getDaysOfMonth, getMonthOfYear, getYears } from '../utils/date';
 import RadioButton from '../components/RadioButton';
 
+import { isValid } from 'date-fns';
+
 const UserScreen = ({ navigation }) => {
-  const [name, setName] = React.useState(null);
+  const [name, setName] = React.useState('');
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
   const [selectedColor, setSelectedColor] = useState('');
-  console.log(name);
-  console.log(day, month, year);
+
   const validateUser = () => {
+    if (isValid(new Date(year, month, day))) {
+      Alert.alert(
+        'Data inválida',
+        'Por favor, verifique se a data está correta',
+      );
+    }
+
     if (name.length <= 1) {
       Alert.alert('Nome inválido', 'O nome deve ter mais de 1 carácter');
     }
@@ -112,6 +119,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    color: colors.text,
     width: '100%',
     borderRadius: 10,
     paddingTop: 10,

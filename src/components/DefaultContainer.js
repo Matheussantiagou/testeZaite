@@ -34,7 +34,6 @@ export default function DefaultContainer({ children }) {
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    borderWidth: 1,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     justifyContent: 'center',
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     alignItems: 'center',
     backgroundColor: colors.background,
-    //borderWidth: 1,
   },
 
   page: {

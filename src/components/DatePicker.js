@@ -31,7 +31,7 @@ const DatePicker = ({ onSelect }) => {
       {show && (
         <DateTimePicker
           format="dd/MM/yyyy"
-          style={{ width: 200 }}
+          style={styles.date}
           value={date || new Date()}
           onChange={onChangeDate}
         />
@@ -57,5 +57,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
+  },
+  date: {
+    width: 200,
   },
 });
