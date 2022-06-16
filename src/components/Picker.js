@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { colors } from '../global/theme';
@@ -18,9 +18,8 @@ const Picker = ({ listItems, selectedItem, ...props }) => {
       items={listItems}
       setOpen={setOpen}
       onSelectItem={item => setValue(item.value)}
-      dropDownDirection="TOP"
-      {...props}
       style={styles.picker}
+      {...props}
     />
   );
 };
@@ -29,7 +28,7 @@ export default Picker;
 
 const styles = StyleSheet.create({
   picker: {
-    marginVertical: 10,
+    marginVertical: 5,
     borderWidth: 0,
     backgroundColor: colors.gray,
     shadowColor: '#000',

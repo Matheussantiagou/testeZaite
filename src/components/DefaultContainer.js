@@ -1,41 +1,11 @@
-import {
-  Alert,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, { useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+
 import LinearGradient from 'react-native-linear-gradient';
-import Picker from './src/components/Picker';
-import { getDaysOfMonth, getMonthOfYear, getYears } from './src/utils/date';
-import { colors } from './src/global/theme';
 
-const primaryColor = '#7f34c9';
+import { colors } from '../global/theme';
 
-export default function App() {
-  const [day, setDay] = useState(null);
-  const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
-
-  const isTodayDate = () => {
-    if (day && month && year) {
-      const today = new Date().toLocaleDateString();
-      const selectedDate = new Date(year, month, day).toLocaleDateString();
-
-      console.log({ today, selectedDate });
-      const isDateValid = selectedDate === today;
-      if (isDateValid) {
-        Alert.alert('Data Valida');
-      } else {
-        Alert.alert('Data Inválida', 'Selecione a data de hoje');
-      }
-    } else {
-      Alert.alert('Data Inválida', 'Selecione a data de hoje');
-    }
-  };
-
+export default function DefaultContainer({ children }) {
   return (
     <View style={styles.page}>
       <LinearGradient
@@ -55,30 +25,7 @@ export default function App() {
         <View style={styles.tittleContainer}>
           <Text style={styles.title}>Teste App</Text>
         </View>
-        <View style={styles.subTittleContainer}>
-          <Text style={styles.SubTittle}>Data de Hoje:</Text>
-        </View>
-        <Picker
-          listItems={getDaysOfMonth()}
-          placeholder="Dia"
-          selectedItem={setDay}
-        />
-        <Picker
-          listItems={getMonthOfYear()}
-          placeholder="Mes"
-          selectedItem={setMonth}
-        />
-        <Picker
-          listItems={getYears()}
-          placeholder="Ano"
-          selectedItem={setYear}
-        />
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={isTodayDate} style={styles.confirmButton}>
-            <Text style={styles.confirmText}>OK</Text>
-          </TouchableOpacity>
-        </View>
+        {children}
       </View>
     </View>
   );
@@ -121,7 +68,7 @@ const styles = StyleSheet.create({
   },
   subTittleContainer: {
     alignItems: 'flex-start',
-    
+
     width: '100%',
   },
   SubTittle: {
