@@ -14,7 +14,7 @@ import Picker from '../components/Picker';
 import { getDaysOfMonth, getMonthOfYear, getYears } from '../utils/date';
 import RadioButton from '../components/RadioButton';
 
-import { isValid } from 'date-fns';
+import { isExists } from 'date-fns';
 
 const UserScreen = ({ navigation }) => {
   const [name, setName] = React.useState('');
@@ -24,17 +24,20 @@ const UserScreen = ({ navigation }) => {
   const [selectedColor, setSelectedColor] = useState('');
 
   const validateUser = () => {
-    if (isValid(new Date(year, month, day))) {
+    const isDateValid = isExists(year, month, day);
+
+    if (!isDateValid) {
       Alert.alert(
         'Data inválida',
         'Por favor, verifique se a data está correta',
       );
+      return;
     }
-
     if (name.length <= 1) {
       Alert.alert('Nome inválido', 'O nome deve ter mais de 1 carácter');
+      return;
     }
-    if (name.length > 1 && day && month && year) {
+    if (name.length > 1 && day && month && year && selectedColor) {
       navigation.navigate('Final', { name, day, month, year, selectedColor });
     }
   };
